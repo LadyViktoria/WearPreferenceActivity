@@ -1,4 +1,4 @@
-package preference;
+package me.denley.wearpreferenceactivity.preference;
 
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.denley.wearpreferenceactivity.R;
-import preference.internal.ListItemLayout;
-import preference.internal.TitledWearActivity;
-import preference.internal.WearPreferenceItem;
-import preference.internal.WearPreferenceScreen;
+import me.denley.wearpreferenceactivity.preference.internal.ListItemLayout;
+import me.denley.wearpreferenceactivity.preference.internal.TitledWearActivity;
+import me.denley.wearpreferenceactivity.preference.internal.WearPreferenceItem;
+import me.denley.wearpreferenceactivity.preference.internal.WearPreferenceScreen;
 
 /**
  * An Activity that will show preferences items in a list.

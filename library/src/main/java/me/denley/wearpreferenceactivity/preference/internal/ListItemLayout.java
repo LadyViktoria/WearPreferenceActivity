@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package preference.internal;
+package me.denley.wearpreferenceactivity.preference.internal;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -36,7 +36,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import me.denley.wearpreferenceactivity.R;
-import preference.WearPreference;
+import me.denley.wearpreferenceactivity.preference.WearPreference;
 
 
 @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)

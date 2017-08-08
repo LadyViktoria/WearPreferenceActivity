@@ -1,11 +1,11 @@
-package preference;
+package me.denley.wearpreferenceactivity.preference;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
-import preference.internal.WearPreferenceItem;
+import me.denley.wearpreferenceactivity.preference.internal.WearPreferenceItem;
 
 /**
  * This is the base class for all other preference types.

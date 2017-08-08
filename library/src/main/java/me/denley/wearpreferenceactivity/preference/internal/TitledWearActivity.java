@@ -1,11 +1,7 @@
-package preference.internal;
+package me.denley.wearpreferenceactivity.preference.internal;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
 import me.denley.wearpreferenceactivity.R;

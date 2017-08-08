@@ -1,4 +1,4 @@
-package preference;
+package me.denley.wearpreferenceactivity.preference;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import preference.internal.WearPreferenceScreen;
+import me.denley.wearpreferenceactivity.preference.internal.WearPreferenceScreen;
 
 /**
  * Used to parse preferences xml files into an object model.

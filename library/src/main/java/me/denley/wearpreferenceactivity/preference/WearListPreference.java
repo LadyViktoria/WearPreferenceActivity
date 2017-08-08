@@ -1,4 +1,4 @@
-package preference;
+package me.denley.wearpreferenceactivity.preference;;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
 import me.denley.wearpreferenceactivity.R;
-import preference.internal.ListChooserActivity;
+import me.denley.wearpreferenceactivity.preference.internal.ListChooserActivity;
 
 /**
  * A simple list preference type.

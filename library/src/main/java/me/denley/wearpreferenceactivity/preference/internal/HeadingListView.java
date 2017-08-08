@@ -1,8 +1,7 @@
-package preference.internal;
+package me.denley.wearpreferenceactivity.preference.internal;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.wearable.view.WearableListView;
 import android.util.AttributeSet;
@@ -12,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import me.denley.wearpreferenceactivity.R;
+
 
 public class HeadingListView extends RelativeLayout implements WearableListView.OnScrollListener {
 

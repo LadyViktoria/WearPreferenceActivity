@@ -1,4 +1,4 @@
-package preference.internal;
+package me.denley.wearpreferenceactivity.preference.internal;
 
 import android.content.Context;
 import android.content.Intent;

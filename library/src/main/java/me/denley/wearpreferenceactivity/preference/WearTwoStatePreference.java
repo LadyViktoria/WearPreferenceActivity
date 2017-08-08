@@ -1,4 +1,4 @@
-package preference;
+package me.denley.wearpreferenceactivity.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;

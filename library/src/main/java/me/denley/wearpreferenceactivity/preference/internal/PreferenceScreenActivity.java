@@ -1,8 +1,8 @@
-package preference.internal;
+package me.denley.wearpreferenceactivity.preference.internal;
 
 import android.os.Bundle;
 
-import preference.WearPreferenceActivity;
+import me.denley.wearpreferenceactivity.preference.WearPreferenceActivity;
 
 public class PreferenceScreenActivity extends WearPreferenceActivity {
 

@@ -1,4 +1,4 @@
-package preference.internal;
+package me.denley.wearpreferenceactivity.preference.internal;
 
 import android.support.annotation.NonNull;
 import android.support.wearable.view.CircledImageView;
