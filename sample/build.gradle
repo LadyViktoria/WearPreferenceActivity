@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId project.GROUP_ID + '.sample'
-        minSdkVersion 20
-        targetSdkVersion 23
+        minSdkVersion 23
+        targetSdkVersion 26
         versionCode project.VERSION_CODE
         versionName project.VERSION_NAME
     }

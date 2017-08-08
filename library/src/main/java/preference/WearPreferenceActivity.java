@@ -1,6 +1,7 @@
 package preference;
 
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.XmlRes;
 import android.support.wearable.view.WearableListView;
@@ -24,6 +25,7 @@ public abstract class WearPreferenceActivity extends TitledWearActivity {
 
     private WearableListView list;
     private List<WearPreferenceItem> preferences = new ArrayList<>();
+    protected WearPreferenceScreen prefsRoot;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +48,38 @@ public abstract class WearPreferenceActivity extends TitledWearActivity {
      * @param parser        A parser used to parse custom preference types
      */
     protected void addPreferencesFromResource(@XmlRes int prefsResId, @NonNull XmlPreferenceParser parser) {
-        final WearPreferenceScreen prefsRoot = parser.parse(this, prefsResId);
-        addPreferencesFromPreferenceScreen(prefsRoot);
+        WearPreferenceScreen prefScr = parser.parse(this, prefsResId);
+        addPreferencesFromPreferenceScreen(prefScr);
     }
 
     /** DO NOT USE - For internal use only */
     protected void addPreferencesFromPreferenceScreen(WearPreferenceScreen preferenceScreen){
+        prefsRoot = preferenceScreen;
         addPreferences(preferenceScreen.getChildren());
     }
 
     private void addPreferences(List<WearPreferenceItem> newPreferences){
         preferences = newPreferences;
+        setAdapter();
+    }
+
+    protected void readPreferencesFromResource(@XmlRes int prefsResId) {
+        XmlPreferenceParser parser = new XmlPreferenceParser();
+        prefsRoot = parser.parse(this, prefsResId);
+        preferences = prefsRoot.getChildren();
+    }
+
+    public void setScreenBackground(@ColorRes int color) {
+        if(color > 0) {
+            getWindow().getDecorView().setBackgroundColor(getColor(color));
+        }
+    }
+
+    public void setAdapter() {
+        if (prefsRoot != null && prefsRoot.getBackground() > 0) {
+            setScreenBackground(prefsRoot.getBackground());
+        }
+
         list.setAdapter(new SettingsAdapter());
 
         list.setClickListener(new WearableListView.ClickListener() {
@@ -91,4 +114,7 @@ public abstract class WearPreferenceActivity extends TitledWearActivity {
         }
     }
 
+    public List<WearPreferenceItem> getPreferences() {
+        return preferences;
+    }
 }

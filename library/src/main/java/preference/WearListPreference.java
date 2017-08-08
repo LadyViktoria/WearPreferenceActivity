@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
@@ -23,6 +24,9 @@ public class WearListPreference extends WearPreference {
     private CharSequence[] entries, entryValues;
     private int[] icons;
     private boolean useEntryAsSummary = true;
+    @ColorRes
+    private int background;
+
 
     public WearListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,6 +44,7 @@ public class WearListPreference extends WearPreference {
         TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ListPreference, 0, 0);
         try {
             useEntryAsSummary = array.getBoolean(R.styleable.ListPreference_wear_entryAsSummary, true);
+            background = array.getResourceId(R.styleable.ListPreference_wear_listBackground, -1);
 
             if(array.hasValue(R.styleable.ListPreference_wear_entryIcons)) {
                 final int resId = array.getResourceId(R.styleable.ListPreference_wear_entryIcons, 0);
@@ -111,6 +116,8 @@ public class WearListPreference extends WearPreference {
                 getKey(),
                 super.getTitle(context).toString(),
                 super.getIcon(context),
+                super.getTintColor(context),
+                background,
                 entries,
                 entryValues,
                 icons,

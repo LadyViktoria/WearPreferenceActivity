@@ -2,6 +2,7 @@ package preference.internal;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -18,6 +19,7 @@ public abstract class WearPreferenceItem implements Serializable {
     @DrawableRes private int icon;
     private String title;
     private String summary;
+    @ColorRes private int tintColor = -1;
 
     public WearPreferenceItem(@NonNull final Context context, @NonNull final AttributeSet attrs) {
         obtainAndroidAttributes(context, attrs);
@@ -28,6 +30,7 @@ public abstract class WearPreferenceItem implements Serializable {
         icon = attrs.getAttributeResourceValue(NAMESPACE_ANDROID, "icon", 0);
         title = loadAndroidStringAttr(context, attrs, "title");
         summary = loadAndroidStringAttr(context, attrs, "summary");
+        tintColor = attrs.getAttributeResourceValue(NAMESPACE_ANDROID, "tint", 0);
     }
 
     private void obtainCustomAttributes(@NonNull final Context context, @NonNull final AttributeSet attrs) {
@@ -43,6 +46,10 @@ public abstract class WearPreferenceItem implements Serializable {
 
         if(array.hasValue(R.styleable.Preference_wear_summary)) {
             summary = array.getString(R.styleable.Preference_wear_summary);
+        }
+
+        if(array.hasValue(R.styleable.Preference_wear_tint)) {
+            tintColor = array.getResourceId(R.styleable.Preference_wear_tint, -1);
         }
 
         array.recycle();
@@ -91,4 +98,23 @@ public abstract class WearPreferenceItem implements Serializable {
     }
 
 
+    public int getTintColor(@NonNull final Context context) {
+        return tintColor;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setTintColor(int tintColor) {
+        this.tintColor = tintColor;
+    }
 }

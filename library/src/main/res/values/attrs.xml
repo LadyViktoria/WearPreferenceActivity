@@ -5,11 +5,17 @@
         <attr name="wear_icon" format="reference" />
         <attr name="wear_title" format="string" />
         <attr name="wear_summary" format="string" />
+        <attr name="wear_tint" format="reference"/>/>
     </declare-styleable>
 
     <declare-styleable name="ListPreference">
         <attr name="wear_entryAsSummary" format="boolean" />
         <attr name="wear_entryIcons" format="reference" />
+        <attr name="wear_listBackground" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="PreferenceScreen">
+        <attr name="wear_screenBackground" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="TwoStatePreference">

@@ -23,6 +23,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ import android.widget.TextView;
 
 import me.denley.wearpreferenceactivity.R;
 import preference.WearPreference;
+
 
 @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
 public class ListItemLayout extends FrameLayout implements WearableListView.OnCenterProximityListener, SharedPreferences.OnSharedPreferenceChangeListener {
@@ -56,8 +58,8 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
     @Nullable private TextView title, summary;
 
     private float circleRadiusCenter, circleRadiusNonCenter;
-    private int circleColorCenter = Color.TRANSPARENT;
-    private int circleColorNonCenter = Color.TRANSPARENT;
+    //private int circleColorCenter = Color.TRANSPARENT;
+    //private int circleColorNonCenter = Color.TRANSPARENT;
 
     private CircleSizeAnimation circleGrowAnimation = null;
     private CircleSizeAnimation circleShrinkAnimation = null;
@@ -113,8 +115,8 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
                 circleRadiusNonCenter = array.getDimension(R.styleable.ListItemLayout_pref_icon_circle_radius,
                         density * CIRCLE_RADIUS_NON_CENTER_DP);
                 final float borderWidth = array.getDimension(R.styleable.ListItemLayout_pref_icon_circle_border_width, 0);
-                circleColorCenter = array.getColor(R.styleable.ListItemLayout_pref_icon_circle_color_selected, Color.TRANSPARENT);
-                circleColorNonCenter = array.getColor(R.styleable.ListItemLayout_pref_icon_circle_color, Color.TRANSPARENT);
+                //circleColorCenter = array.getColor(R.styleable.ListItemLayout_pref_icon_circle_color_selected, Color.TRANSPARENT);
+                //circleColorNonCenter = array.getColor(R.styleable.ListItemLayout_pref_icon_circle_color, Color.TRANSPARENT);
                 final int borderColor = array.getColor(R.styleable.ListItemLayout_pref_icon_circle_border_color, Color.TRANSPARENT);
 
                 array.recycle();
@@ -123,7 +125,7 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
                 icon.setCircleBorderWidth(borderWidth);
             }
 
-            icon.setCircleColor(circleColorCenter);
+            //icon.setCircleColor(circleColorCenter);
             icon.setCircleRadiusPressed(circleRadiusCenter);
             circleGrowAnimation = new CircleSizeAnimation(icon, circleRadiusCenter);
             circleShrinkAnimation = new CircleSizeAnimation(icon, circleRadiusNonCenter);
@@ -146,13 +148,13 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
         this.circleRadiusNonCenter = circleRadiusNonCenter;
     }
 
-    public void setCircleColorCenter(int circleColorCenter) {
+    /*public void setCircleColorCenter(int circleColorCenter) {
         this.circleColorCenter = circleColorCenter;
-    }
+    }*/
 
-    public void setCircleColorNonCenter(int circleColorNonCenter) {
+    /*public void setCircleColorNonCenter(int circleColorNonCenter) {
         this.circleColorNonCenter = circleColorNonCenter;
-    }
+    }*/
 
     public void bindPreference(@NonNull final WearPreferenceItem preference){
         bindedPreference = preference;
@@ -167,18 +169,21 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
 
     private void bindPreferenceView(@NonNull final WearPreferenceItem preference){
         final Context context = getContext();
-        bindView(preference.getIcon(context), preference.getTitle(context), preference.getSummary(context));
+        bindView(preference.getIcon(context), preference.getTitle(context), preference.getSummary(context), preference.getTintColor(context));
     }
 
     public void bindView(@DrawableRes final int iconId,
                          @Nullable final CharSequence titleText,
-                         @Nullable final CharSequence summaryText) {
-        if(icon !=null) {
+                         @Nullable final CharSequence summaryText,
+                         @ColorRes final int tintId) {
+        if(icon != null) {
             icon.setImageResource(iconId);
+            if (tintId > 0) {
+                icon.setImageTint(getResources().getColor(tintId));
+            }
         }
         if(title!=null) {
             title.setText(titleText);
-            title.setTextColor(-1);
         }
         if(summary!=null) {
             if(summaryText==null) {
@@ -191,7 +196,8 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
     }
 
     @Override public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
-        if(bindedPreference instanceof WearPreference && key.equals(((WearPreference) bindedPreference).getKey())){
+        //if(bindedPreference instanceof WearPreference && key.equals(((WearPreference) bindedPreference).getKey())){
+        if(bindedPreference instanceof WearPreference && ((WearPreference) bindedPreference).getKey().equals(key)){
             bindPreferenceView(bindedPreference);
         }
     }
@@ -199,7 +205,7 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
     @Override public void onCenterPosition(boolean animate) {
         if(icon!=null) {
             icon.setAlpha(1);
-            icon.setCircleColor(circleColorCenter);
+            //icon.setCircleColor(circleColorCenter);
 
             if (animate) {
                 circleGrowAnimation.animate();
@@ -210,7 +216,6 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
 
         if(title!=null) {
             title.setAlpha(1);
-            title.setTextColor(-1);
         }
         if(summary!=null) {
             summary.setAlpha(1);
@@ -220,7 +225,7 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
     @Override public void onNonCenterPosition(boolean animate) {
         if(icon!=null) {
             icon.setAlpha(ALPHA_NON_CENTER);
-            icon.setCircleColor(circleColorNonCenter);
+            //icon.setCircleColor(circleColorNonCenter);
 
             if (animate) {
                 circleShrinkAnimation.animate();
@@ -231,10 +236,10 @@ public class ListItemLayout extends FrameLayout implements WearableListView.OnCe
 
         if(title!=null) {
             title.setAlpha(ALPHA_NON_CENTER);
-            title.setTextColor(-1);
         }
         if(summary!=null) {
             summary.setAlpha(ALPHA_NON_CENTER);
         }
     }
+
 }
